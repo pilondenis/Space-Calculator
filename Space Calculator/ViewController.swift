@@ -30,35 +30,66 @@ class ViewController: UIViewController {
     
     // MARK: Outlets
     @IBOutlet weak var outputLbl: UILabel!
+    @IBOutlet weak var clearBtn: UIButton!
     
     
     // MARK: Actions
     @IBAction func bumberPressed(btn: UIButton!) {
         playSound()
         
-        runningNumber += "\(btn.tag)"
+        if runningNumber == "0" {
+            runningNumber = "\(btn.tag)"
+        } else {
+            runningNumber += "\(btn.tag)"
+        }
         outputLbl.text = runningNumber
         
+        
+        changeClearBtn("clear")
     }
     
     @IBAction func onDividePress(sender: UIButton) {
+        changeClearBtn("clear")
         processOpperation(Operation.Divide)
     }
     
     @IBAction func onMultiplyPressed(sender: UIButton) {
+        changeClearBtn("clear")
         processOpperation(Operation.Multiply)
     }
     
     @IBAction func onSubstractP(sender: UIButton) {
+        changeClearBtn("clear")
         processOpperation(Operation.Substract)
     }
     
     @IBAction func onAddPressed(sender: UIButton) {
+        changeClearBtn("clear")
         processOpperation(Operation.Add)
     }
     
     @IBAction func onEqualPressed(sender: UIButton) {
+        changeClearBtn("all-clear")
         processOpperation(Operation.Empty)
+        leftNum = "0"
+        rightNum = "0"
+        runningNumber = ""
+    }
+    
+    @IBAction func onClearPressed(sender: UIButton) {
+        if runningNumber != "" {
+            runningNumber = "0"
+        } else if currentOperation != Operation.Empty {
+            currentOperation = Operation.Empty
+            runningNumber = "0"
+        } else {
+            leftNum = ""
+            rightNum = ""
+            currentOperation = Operation.Empty
+            runningNumber = "0"
+        }
+        outputLbl.text = runningNumber
+        changeClearBtn("all-clear")
     }
     
     // MARK: Functions
@@ -83,6 +114,8 @@ class ViewController: UIViewController {
                 leftNum = results
                 outputLbl.text = results
                 currentOperation = op
+            } else if leftNum != "" && currentOperation != Operation.Empty {
+                currentOperation = op
             } else {
                 // First time operation is pressed
                 leftNum = runningNumber
@@ -90,6 +123,7 @@ class ViewController: UIViewController {
                 currentOperation = op
             }
         }
+        
     }
     
     func playSound() {
@@ -98,6 +132,11 @@ class ViewController: UIViewController {
         } else {
             btnSound.play()
         }
+    }
+    
+    func changeClearBtn(name: String) {
+        let whichImage = name + ".png"
+        clearBtn.setImage(UIImage(named: whichImage), forState: .Normal)
     }
     
     override func viewDidLoad() {

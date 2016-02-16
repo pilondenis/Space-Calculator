@@ -215,6 +215,10 @@
                                                     <constraint firstAttribute="height" constant="52" id="Wbx-jX-vbM"/>
                                                     <constraint firstAttribute="width" constant="50" id="k7A-O3-k4E"/>
                                                 </constraints>
+                                                <state key="normal" image="all-clear"/>
+                                                <connections>
+                                                    <action selector="onClearPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b6N-Yk-cRF"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xP4-MC-2s5">
                                                 <rect key="frame" x="112" y="0.0" width="50" height="52"/>
@@ -272,6 +276,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="clearBtn" destination="BWx-xc-0Yb" id="mM6-VN-x5E"/>
                         <outlet property="outputLbl" destination="0bH-2Z-ff8" id="6l0-0q-l4k"/>
                     </connections>
                 </viewController>
@@ -293,6 +298,7 @@
         <image name="9" width="111" height="114"/>
         <image name="Background" width="1667" height="1667"/>
         <image name="add" width="111" height="114"/>
+        <image name="all-clear" width="111" height="114"/>
         <image name="backpanel" width="620" height="938"/>
         <image name="counter" width="516" height="133"/>
         <image name="divide" width="111" height="114"/>
